@@ -1,0 +1,254 @@
+ข้อที่ 1: การสร้าง class
+
+การสร้างคลาส (class)
+การสร้างคลาสทำได้โดยใช้คีย์เวิร์ด class ตามด้วยชื่อคลาส
+การสร้าง def __init__
+__init__ เป็นฟังก์ชันพิเศษที่ทำงานโดยอัตโนมัติเมื่อมีการสร้างวัตถุของคลาสนี้ขึ้นมา เมธอดนี้ช่วยให้เราสามารถกำหนดค่าเริ่มต้นให้กับวัตถุโดย __init__ จะมีอาร์กิวเมนต์ self เป็นพารามิเตอร์แรกเสมอ ซึ่งหมายถึงวัตถุของคลาสที่ถูกสร้างขึ้น
+
+
+class Dog: # กำหนดคลาสชื่อ Dog
+  def __init__(self, name, owner):
+    self.name = name # กำหนดค่าเริ่มต้นให้กับคุณสมบัติ name
+    self.owner = owner# กำหนดค่าเริ่มต้นให้กับคุณสมบัติ owner
+
+
+
+
+
+ข้อที่ 2 การสร้าง constructor และ การกำหนด attribute
+
+Class Constructor คือฟังก์ชันที่ใช้สำหรับสร้างและกำหนดค่าเริ่มต้นให้กับวัตถุ (Object) เมื่อสร้างอินสแตนซ์จากคลาส ใน Python ฟังก์ชัน constructor จะใช้เมธอด __init__ ซึ่งจะถูกเรียกทันทีเมื่อมีการสร้างอินสแตนซ์จากคลาสนั้น โดยในฟังก์ชันนี้เราจะสามารถกำหนดค่าเริ่มต้นให้กับ Attribute ของคลาสได้ โดย parameter ของ _init_ ใส่มาเพื่อกำหนดว่า ในการสร้าง Object จำเป็นต้องใช้ argument อะไรบ้างในการกำหนดค่าให้ attribute ของ Object ที่ต้องการสร้าง
+
+การกำหนด Attribute สามารถทำได้โดยใช้ self.attribute_name ภายในฟังก์ชัน __init__ เพื่อกำหนดค่าให้แต่ละอินสแตนซ์
+
+tip: หากเรารู้ว่า Object จาก Class ที่สร้าง จะต้องมีค่า Attribute ใดที่มีค่าเป็นค่าเดียวกันทั้งหมด เราสามารถกำหนดค่านั้นไว้ได้เลย ไม่จำเป็นต้องกำหนดทุกๆ attribute ให้เป็น parameter ของ __init__ สามารถเลือกแค่ attribute ที่จะมีค่าต่างกัน หรือจำเป็นต้องรับค่าก็พอ
+
+ตัวอย่างเช่น
+class Book:
+  def __init__(self, name, page, writer): #contructor
+    self.name = name
+    self.page = page
+    self.writer = writer
+    self.publisher = "ITBOOK" 
+    #กำหนดว่าหนังสือทุกเล่มที่สร้างจาก Class นี้มาจำสำนักพิมพ์ ITBOOK เหมือนกัน
+
+
+
+
+
+ข้อที่ 3 การสร้าง object จาก class
+การสร้างวัตถุจากคลาส
+เมื่อเราเรียกคลาสพร้อมกับส่งอาร์กิวเมนต์ที่กำหนดค่าให้กับ __init__ ระบบจะเรียกใช้ __init__ เพื่อกำหนดค่านั้น ๆ ให้กับวัตถุ
+class Dog:
+  def __init__(self, name, owner):
+    self.name = name 
+    self.owner = owner
+pup = Dog("Pluto", "Mickey") #ส่ง "Pluto"ให้name และส่ง "Mickey"ให้ownerและทำการสร้าง Object จาก class Dog
+print(pup.name) #การเรียกใช้ค่า name ของ pup
+
+
+
+
+
+
+ข้อที่ 4 การเรียกใช้ attribute
+
+- การเรียกใช้ Attribute
+แบ่งเป็น 2 กรณีหลัก
+1.ภายใน class
+สามารถใช้ self.attribute ที่ต้องการได้โดยตรง
+2.เรียก Attribute ของ object
+สามารถใช้ตัวแปรที่เก็บ object.attribute ที่ต้องการได้โดยตรง
+
+- การเปลี่ยนแปลงค่า Attribute
+แบ่งเป็น 2 กรณีหลักเช่นกัน
+1.การเปลี่ยนแปลงค่าภายใน class
+สามารถใช้ self.attribute = ค่าที่ต้องการกำหนด ที่ต้องการได้โดยตรง
+2.การเปลี่ยนแปลงค่า Attribute ของ object
+สามารถใช้ตัวแปรที่เก็บ object.attribute = ค่าที่ต้องการกำหนด ที่ต้องการได้โดยตรง
+class Dog:
+  def __init__(self, name, owner):
+    self.name = name 
+    self.owner = owner
+
+pup = Dog("Pluto", "Mickey")
+print(pup.name) #เรียก name ของ pup มาแสดงผล
+pup.owner = "Minney" #กำหนด owner ของ pup เป็น Minney
+
+
+
+
+
+ข้อที่ 5 การสร้าง method
+คือการสร้างฟังก์ชันภายในคลาส โดยทุก method ที่อยู่ในคลาสจะต้องรับ self เป็นพารามิเตอร์แรก ซึ่ง self ใช้เพื่ออ้างถึงตัววัตถุที่เรียกใช้งาน method นั้น ๆ
+class Dog:
+  def __init__(self, name, owner):
+    self.name = name 
+    self.owner = owner
+  def info(self): #สร้าง method info
+    print("%s's owner is %s."%(self.name, self.owner))
+pup = Dog("Pluto", "Mickey")
+pup.info() #การเรียกใช้ method
+
+
+
+
+
+
+ข้อที่ 6 การสร้าง Encapsulate และ setter getter
+การห่อหุ้มข้อมูล (Encapsulation) ใน Python คือหลักการที่ใช้ปกป้องข้อมูลภายในวัตถุ (object) ของคลาสจากการเข้าถึงหรือการแก้ไขโดยตรงจากภายนอกคลาส โดยทำให้การเข้าถึงข้อมูลจำเป็นต้องใช้ method ที่กำหนดไว้ การทำเช่นนี้จะช่วยป้องกันข้อมูลไม่ให้ถูกแก้ไขโดยไม่ได้ตั้งใจและสามารถควบคุมการเข้าถึงและการปรับค่าได้ตามความเหมาะสม
+
+ใน Python การห่อหุ้มข้อมูลมักใช้การกำหนดคุณสมบัติ (attribute) เป็น "private" โดยการเติมขีดล่างหน้าชื่อ เช่น __attribute และสร้าง method เพื่อจัดการการเข้าถึงข้อมูลเหล่านี้ ที่เรียกว่า setter getter
+class Dog:
+  def __init__(self, name, owner):
+    self.name = name 
+    self.__owner = owner #owner ถูกห่อหุ้ม
+  def getOwnwer(self): #getter ของ owner เรียกใช้เพื่อ เรียกใช้ค่า owner ของ object
+    return self.__owner
+  def setOwner(self, owner):#setter ของ owner เรียกใช้เพื่อ กำหนดค่าowner ของ object
+    self.__owner = owner
+pup = Dog("Pluto", "Mickey")
+print(pup.getOwner()) #การเรียกใช้ getter
+pup.setOwner("Donald") #การเรียกใช้ setter
+
+เนื่องจาก owner ถูก encapsulation ทำให้ไม่สามารถเรียก pup.owner โดยตรงจากภายนอกclass ได้ จึงต้องใช้ผ่าน method setter getter ที่สร้างขึ้นมาแทน
+
+class Person:
+    def __init__(self, name, age):
+        self.__name = name
+        self.age = age
+    def getName(self):
+        return self.__name
+        #จงเติมmethod getter ให้สมบูรณ์
+    def setName(self, name):
+        self.__name = name
+        #จงเติมmethod setter ให้สมบูรณ์
+p1 = Person("Billy", 16)
+print(p1.getName()) #จงเรียกใช้ getter เพื่อแสดงชื่อของ p1
+p1.setName("William")#จงเรียกใช้ setter เพื่อกำหนดชื่อของ p1 เป็น William
+print(p1.getName()) #จงเรียกใช้ getter เพื่อแสดงชื่อของ p1 อีกครั้ง
+
+
+
+
+
+
+
+
+ข้อที่ 7 แบบฝึกหัดข้อที่ 1
+จงสร้าง Class ตามที่กำหนด
+
+ชื่อ class ว่า Milk
+มี Attribute ดังนี้
+รสชาติ flavor เก็บเป็น String
+ราคา price เก็บเป็น int
+ปริมาณ quantity กำหนดค่าเริ่มต้นเป็น 20
+มี Method ดังนี้
+reStock()
+มีหน้าที่กำหนด attribute quantity ให้เป็น 20
+แสดงข้อความ "-- restock Complete --"
+sell(amount)
+หาก amount มีค่ามากกว่า quantity ให้แสดงข้อความ "Not Enough"
+หาก quantity มีค่ามากกว่าหรือเท่ากับ amount
+ให้นำ amount ลบออกจาก quantity
+
+class Milk:
+   def __init__(self, flavor, price):
+       self.flavor = flavor
+       self.price = price
+       self.quantity = 20
+   def reStock(self) :
+       self.quantity = 20
+       print("-- restock Complete --")
+   def sell(self, amount):
+       if amount > self.quantity:
+           print("Not Enough")
+       else:
+           self.quantity -= amount
+test = Milk("Original", 50)
+test.sell(60)
+test.sell(10)
+test.reStock()
+print(test.quantity)
+
+ข้อที่ 8 แบบฝึกหัดข้อที่ 2
+จงสร้าง Class ตามที่กำหนด และ เขียน code ตามคำสั่งใน comment ให้ถูกต้อง
+
+ชื่อ class ว่า Farm
+มี Attribute ดังนี้
+ชื่อฟาร์ม name ถูก Encapsulate เป็น private attribute
+ชื่อเจ้าของ owner ถูก Encapsulate เป็น private attribute
+จำนวนวัวที่เลี้ยง cow ถูก Encapsulate เป็น private attribute
+มี Method ดังนี้
+จงสร้าง setter และ getter ของ attribute แต่ละตัว ดังนี้
+name -> setName(name), getName()
+owner-> setOwner(owner), getOwner()
+cow -> setCow(cow), getCow()
+class Farm:
+    def __init__(self, name, owner, cow):
+        self.__name = name
+        self.__owner = owner
+        self.__cow = cow
+    def setName(self, name):
+        self.__name = name
+    def getName(self):
+        return self.__name
+    def setOwner(self, owner):
+        self.__owner = owner
+    def getOwner(self):
+        return self.__owner
+    def setCow(self,cow):
+        self.__cow = cow
+    def getCow(self):
+        return self.__cow
+
+myfarm = Farm("Chok-Dee", "Billy", 20)
+print(myfarm.getName())
+print(myfarm.getCow())
+myfarm.setCow(50)
+myfarm.setOwner("Tommy")
+print(myfarm.getName())
+print(myfarm.getOwner())
+print(myfarm.getCow())
+#แสดงผลชื่อฟาร์มของ myfarm
+#แสดงผลจำนวนวัวของ myfarm
+#กำหนดจำนวนวัวของ myfarm เป็น 50
+#กำหนดชื่อเจ้าของ myfarm เป็น Tommy
+#แสดงผลชื่อฟาร์มของ myfarm
+#แสดงผลชื่อเจ้าของ myfarm
+#แสดงผลจำนวนวัว ของ myfarm
+
+
+
+ข้อที่ 9 แบบฝึกหัดข้อที่ 3
+จงแก้ไข code ให้ถูกต้อง โดยมีโครงสร้าง class ดังนี้
+
+ชื่อ class ว่า Wallet
+มี Attribute ดังนี้
+ชื่อเจ้าของ owner ถูก Encapsulate เป็น private attribute
+จำนวนเงิน money ถูก Encapsulate เป็น private attribute
+มี Method ดังนี้
+จงสร้าง setter และ getter ของ attribute แต่ละตัว ดังนี้
+owner-> setOwner(owner), getOwner()
+money -> setMoney(money), getMoney()
+Method pay(amount) เพื่อจ่ายเงิน
+หาก amount มีค่ามากกว่า money ให้แสดงข้อความ "Not Enough"
+หาก money มีค่ามากกว่าหรือเท่ากับ amount
+ให้นำ amount ลบออกจาก money
+class Wallet:
+    def __init__(self, owner, money):
+        self.__owner = owner
+        self.__money = money
+    def setOwner(self,owner):
+        self.__owner = owner
+    def getOwner(self):
+        return self.__owner
+    def setMoney(self, money):
+        self.__money = money
+    def getMoney(self):
+        return self.__money
+    def pay(self, amount):
+        if amount > self.__money:
+            print("Not Enough")
+        else:
+            self.__money -= amount
